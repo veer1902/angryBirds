@@ -1,13 +1,13 @@
 // PascalCase
 // parent class
-class Baseclass{
+class BaseClass{
    constructor(x,y,width, height, angle){
    var options = {
       'density':1.0,
       'friction':1.0,
       'restitution':0.8
    };
-    this.body = Bodies.rectangle(x,y,width,height);
+    this.body = Bodies.rectangle(x,y,width,height, options);
     this.width = width;
     this.heigth = height;
     this.image = loadImage("sprites/base.png");
