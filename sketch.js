@@ -1,9 +1,13 @@
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
-
+var backgroundImg
 var engine, world;
 var box1, pig1;
+function preload(){
+  backgroundImg=loadImage("sprites/bg.png");
+
+}
 
 function setup(){
     var canvas = createCanvas(1200,400);
@@ -28,16 +32,15 @@ function setup(){
     log4 = new Log(760,120,150, PI/7);
     log5 = new Log(870,120,150, -PI/7);
 
-    log6 = new Log(200, 200, 60, PI/2);
-    bird = new Bird(100,100);
+    bird = new Bird(200, 50);
 
     //object = new Class
-    slingshot = new SlingShot(bird.body, log6.body);
+    slingshot = new SlingShot(bird.body, { x: 200, y: 50 });
 
 }
 
 function draw(){
-    background(0);
+    background(backgroundImg);
     Engine.update(engine);
     console.log(box2.body.position.x);
     console.log(box2.body.position.y);
@@ -56,8 +59,18 @@ function draw(){
     box5.display();
     log4.display();
     log5.display();
-    log6.display();
 
     bird.display();
     slingshot.display();
+}
+
+function mouseDragged(){
+  //immediately sets the position of the body (body, position)
+  Matter.Body.setPosition(bird.body, { x:mouseX, y: mouseY } );
+}
+
+function mouseReleased(){
+  // detach bird from slingshot
+  // define fly method/function in SlingShot class and call on slingshot object
+  slingshot.fly();// calling fly method
 }
